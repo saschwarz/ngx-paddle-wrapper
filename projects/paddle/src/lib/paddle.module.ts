@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { PaddleService, PaddleServiceConfig } from './paddle.service';
+
 import { PaddleDirective } from './paddle.directive';
-import { PaddleService } from './paddle.service';
+import { PaddleGlobalConfig } from './interfaces';
 
 @NgModule({
   declarations: [PaddleDirective],
@@ -8,4 +10,13 @@ import { PaddleService } from './paddle.service';
   providers: [PaddleService],
   exports: [PaddleDirective],
 })
-export class PaddleModule {}
+export class PaddleModule {
+  static forRoot(
+    config: PaddleGlobalConfig
+  ): ModuleWithProviders<PaddleModule> {
+    return {
+      ngModule: PaddleModule,
+      providers: [{ provide: PaddleServiceConfig, useValue: config }],
+    };
+  }
+}

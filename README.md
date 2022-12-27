@@ -30,11 +30,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { PaddleModule } from 'ngx-paddle-wrapper';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, PaddleModule],
+  imports: [
+    BrowserModule,
+    // set the sandbox boolean to control which Paddle
+    // environment you are using:
+    PaddleModule.forRoot({ sandbox: !environment.production }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

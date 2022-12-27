@@ -1,3 +1,6 @@
+export interface PaddleGlobalConfig {
+  sandbox?: boolean;
+}
 export interface PaddleConfig {
   vendor: number;
   eventCallback?: Function;
