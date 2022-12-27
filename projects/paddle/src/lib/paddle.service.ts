@@ -1,10 +1,15 @@
 import {
   PaddleCheckoutOptions,
   PaddleConfig,
+  PaddleGlobalConfig,
   PaddleProductPrice,
 } from './interfaces';
 
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
+
+export class PaddleServiceConfig implements PaddleGlobalConfig {
+  sandbox = false;
+}
 
 declare let Paddle: any;
 
@@ -13,8 +18,14 @@ declare let Paddle: any;
 })
 export class PaddleService {
   private loaded: Promise<void>;
+  private sandbox: boolean;
 
-  constructor() {}
+  constructor(@Optional() config?: PaddleServiceConfig) {
+    this.sandbox = false;
+    if (config) {
+      this.sandbox = config.sandbox;
+    }
+  }
 
   /**
    * Create a Paddle instance as soon as Paddle has loaded.
@@ -23,6 +34,9 @@ export class PaddleService {
    */
   public create(config: PaddleConfig): Promise<void> {
     return this.load().then(() => {
+      if (this.sandbox) {
+        Paddle.Environment.set('sandbox');
+      }
       Paddle.Setup(config);
     });
   }
