@@ -4,7 +4,8 @@ This is an Angular wrapper library for Paddle.js.
 
 The author has no affiliation with Paddle.com Market Limited.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4
+and updated to Angular v15.
 
 ## How to use
 
@@ -172,3 +173,32 @@ Pull requests are more than welcome. Note that if you are going to propose drast
 ### Todo
 
 Tests!
+
+### Building ngx-paddle-wrapper
+
+In the root directory of the repo:
+
+```bash
+ng build paddle --configuration production
+```
+
+### Publishing
+
+```bash
+npm login
+cd dist/paddle
+npm publish --access public
+```
+
+### Installing for local development
+
+```bash
+cd dist/paddle
+npm pack
+```
+
+In destination project
+
+```bash
+npm install ../../../ngx-paddle/wrapper/dist/paddle/saschwarz-ngx-paddle-wrapper-1.0.0.tgz
+```
