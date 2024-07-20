@@ -49,28 +49,17 @@ export class AppModule {}
 #### 3a) The easy way, using the `ngxPaddle` Directive
 
 ```html
-<button
-  ngxPaddle
-  [vendor]="123456"
-  [product]="654321"
-  email="test@test.com"
-  (onCheckoutEvent)="checkEvent($event)"
-></button>
+<button ngxPaddle [vendor]="123456" [product]="654321" email="test@test.com" (onCheckoutEvent)="checkEvent($event)"></button>
 ```
 
 #### 3b) The less easy way, using the Service directly
 
-Since most of the functionality is through the service you can imlpement this yourself to customize to your needs further.
+Since most of the functionality is through the service you can implement this yourself to customize to your needs further.
 
 ```typescript
 import { Component, AfterViewInit } from '@angular/core';
 
-import {
-  PaddleService,
-  PaddleCheckoutOptions,
-  PaddleEventCallbackData,
-  PADDLE_EVENT_TYPE,
-} from 'ngx-paddle-wrapper';
+import { PaddleService, PaddleCheckoutOptions, PaddleEventCallbackData, PADDLE_EVENT_TYPE } from 'ngx-paddle-wrapper';
 
 export class ComponentThatImplementsPaddle implements AfterViewInit {
   private paddleOptions: PaddleCheckoutOptions = {
@@ -83,7 +72,7 @@ export class ComponentThatImplementsPaddle implements AfterViewInit {
 
   constructor(private paddleServ: PaddleService) {}
 
-  // Create and open programatically once the library is loaded.
+  // Create and open programmatically once the library is loaded.
   ngAfterViewInit() {
     this.paddleServ.create({
       vendor: 123456,
